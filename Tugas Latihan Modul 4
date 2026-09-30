@@ -1,0 +1,122 @@
+
+enum class CourseStatus { ACTIVE, COMPLETED, DROPPED }
+
+data class Course(val code: String, val name: String, val status: CourseStatus) {
+    companion object {
+        const val PREFIX = "FAB"
+    }
+}
+
+fun Course.displayInfo(): String = "$code - $name - $status"
+
+fun describe(status: CourseStatus): String = when (status) {
+    CourseStatus.ACTIVE -> "Mata kuliah sedang berjalan"
+    CourseStatus.COMPLETED -> "Mata kuliah sudah selesai"
+    CourseStatus.DROPPED -> "Mata kuliah dibatalkan / di-drop"
+}
+
+object AppConfig {
+    const val MAX_COURSES = 5
+}
+
+fun MutableList<Course>.addCourse(course: Course): Boolean {
+    return if (this.size < AppConfig.MAX_COURSES && course.code.startsWith(Course.PREFIX)) {
+        this.add(course)
+        true
+    } else {
+        false
+    }
+}
+
+fun main() {
+
+    println("===== LATIHAN 1 =====")
+
+    val courses = mutableListOf<Course>(
+        Course("PAB101", "Mobile App Development", CourseStatus.ACTIVE),
+        Course("FAB102", "Basis Data", CourseStatus.COMPLETED),
+        Course("FAB103", "Pemrograman Web", CourseStatus.ACTIVE)
+    )
+
+    courses.add(Course("FAB104", "Struktur Data", CourseStatus.ACTIVE))
+
+    courses.removeIf { it.code == "FAB102" }
+
+    println("Daftar mata kuliah tersisa:")
+    for (course in courses) {
+
+        println("- ${course.displayInfo()}")
+    }
+
+    val (code, name, status) = courses[0]
+    println("Destructuring -> code=$code, name=$name, status=$status")
+    
+    // ========================================================
+    println("\n===== LATIHAN 2 =====")
+
+    for (course in courses) {
+        println("${course.name}: ${describe(course.status)}")
+    }
+
+    val droppedCourse = Course("FAB105", "Kalkulus", CourseStatus.DROPPED)
+    println("${droppedCourse.name}: ${describe(droppedCourse.status)}")
+    
+    // ========================================================
+    println("\n===== LATIHAN 3 =====")
+
+    val skills = mutableSetOf("Kotlin", "Java")
+
+    skills.add("Python")
+    skills.add("Kotlin") 
+
+    println("Ukuran Set: ${skills.size}") // 3
+
+    // Operator 'in' untuk memeriksa "Swift"
+    println("Apakah \"Swift\" ada di Set? ${"Swift" in skills}") // false
+
+    // Penjelasan: ukuran Set adalah 3 (bukan 4) karena Set tidak menyimpan elemen
+    // duplikat. "Kotlin" sudah ada sejak awal, sehingga penambahan kedua diabaikan.
+    println("Isi Set: $skills")
+    
+    // ========================================================
+    println("\n===== LATIHAN 4 =====")
+
+    val scores = mutableMapOf<String, Int>()
+    scores["2024001"] = 85
+    scores["2024002"] = 60 
+    scores["2024003"] = 78
+
+    scores["2024002"] = 90
+
+    scores.remove("2024003")
+
+    for ((nim, score) in scores) {
+        println("NIM: $nim, Nilai: $score")
+    }
+
+    val nimTidakAda = "2024999"
+    val hasil = scores[nimTidakAda]
+    println("Nilai NIM $nimTidakAda: $hasil") 
+    
+    // ========================================================
+    println("\n===== LATIHAN 5 =====")
+
+    println("MAX_COURSES = ${AppConfig.MAX_COURSES}")
+    println("PREFIX      = ${Course.PREFIX}")
+
+    val myCourses = mutableListOf<Course>()
+
+    println(myCourses.addCourse(Course("FAB201", "Algoritma", CourseStatus.ACTIVE)))   
+    println(myCourses.addCourse(Course("FAB202", "Jaringan", CourseStatus.ACTIVE)))    
+
+    println(myCourses.addCourse(Course("PAB101", "Mobile App Development", CourseStatus.ACTIVE))) 
+
+    println(myCourses.addCourse(Course("FAB203", "Sistem Operasi", CourseStatus.ACTIVE))) 
+    println(myCourses.addCourse(Course("FAB204", "Statistika", CourseStatus.ACTIVE)))     
+    println(myCourses.addCourse(Course("FAB205", "Etika Profesi", CourseStatus.ACTIVE)))  
+
+    println(myCourses.addCourse(Course("FAB206", "Kewirausahaan", CourseStatus.ACTIVE))) 
+
+    println("Jumlah mata kuliah: ${myCourses.size}")
+    myCourses.forEach { println("- ${it.displayInfo()}") }
+}
