@@ -1,3 +1,8 @@
+# Untuk menanggapi pertanyaan - pertanyaan pada Latihan 9, maka izinkan saya untuk menjawabnya
+# melalui dokumen Readme.md ini, dibawah ini adalah pertanyaan sekaligus jawaban dari saya sendiri.
+
+
+
 # Latihan 9
 
 1. **Tambah satu permintaan lagi.** Tambahkan `suspend fun getCourseCount(): Int` di `TaskRepository` dengan `delay(1500L)`. Simpan hasilnya di field baru pada `TasksUiState`, lalu muat dengan `async` ketiga di `loadData()`. Apakah total waktu pemuatan masih sekitar 2 detik? Jelaskan alasannya.
