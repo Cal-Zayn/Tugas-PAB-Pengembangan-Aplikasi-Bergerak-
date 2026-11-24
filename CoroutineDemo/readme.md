@@ -1,5 +1,4 @@
-# Untuk menanggapi pertanyaan - pertanyaan pada Latihan 9, maka izinkan saya untuk menjawabnya
-# melalui dokumen Readme.md ini, dibawah ini adalah pertanyaan sekaligus jawaban dari saya sendiri.
+# Untuk menanggapi pertanyaan - pertanyaan pada Latihan 9, maka izinkan saya untuk menjawabnya melalui dokumen Readme.md ini, dibawah ini adalah pertanyaan sekaligus jawaban dari saya sendiri.
 
 
 
